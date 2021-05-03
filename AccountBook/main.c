@@ -12,7 +12,7 @@ UI(num);
 sqlite3 *db; // handle of database
 char *err_msg=0; // if occur errors, this pointer point to error msg
 
-if(num==0) system("exit");
+if(num==0) { printf("프로그램을 이용해주셔서 감사합니다."); system("exit"); }
 
 if(num==1) // no.1 is input information in database file
 {
@@ -54,3 +54,4 @@ printf("실행할 작업의 숫자를 입력해주세요 : ");
 scanf("%d",&num);
 }
 //system("command") -> typing "command" in terminal
+//"gcc -o accountbook sqlite3.c main.c" to build in windows command processor
