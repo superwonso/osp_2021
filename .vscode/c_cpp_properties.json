@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}\\**"
+                "${workspaceFolder}\\**",
+                "C:\\Users\\user\\Desktop\\b_b\\osp_2021\\AccountBook"
             ],
             "defines": [
                 "_DEBUG",
