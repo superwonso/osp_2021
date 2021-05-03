@@ -67,3 +67,13 @@ int rc=sqlite3_open("date.db",&db); // open "date.db" database file
     printf("정보가 입력되었습니다.");
     return 0;
 }
+
+int modi()
+{
+printf("Not realized, yet.");
+}
+
+int load()
+{
+printf("Not relized, yet.");
+}
