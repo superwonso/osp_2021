@@ -59,6 +59,7 @@ int rc=sqlite3_open("date.db",&db); // open "date.db" database file
     }
     char *sql="DROP TABLE IF EXISTS Info;"
               "CREATE TABLE Info(Date INT,List TEXT, Price INT);";
+              insert(nNum_value); // data insert function
               while(nNum_value=0)
               {
               "INSERT INTO Info(d1.Date,d1.List,d1.Price);";
