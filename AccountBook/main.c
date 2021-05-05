@@ -84,8 +84,9 @@ int insert(int nNum_value)
    scanf("%d",&nNum_value);
    while(nNum_value=0)
    {
-   printf("\n어떤 데이터를 삽입하시겠습니까? 날짜(숫자로만 이루어져 있어야 함),내용,가격 순으로 입력해주세요. 현재 %d 번째 데이터를 삽입중입니다.",nNum_value);
+   printf("\n어떤 데이터를 삽입하시겠습니까? 날짜,내용,가격(krw)순으로 입력해주세요. ex)10101,A,10000");
    scanf("%d,%c,%d",&d1.Date,d1.List,&d1.Price);
+   printf("현재 %d 번째 데이터를 삽입하셨습니다다.",nNum_value);
    nNum_value=nNum_value-1;
    }
 }
