@@ -6,6 +6,7 @@
 int save(); int load(); int update_db();
 int UI(); int reset_nNum(); int create_table();
 static int search_cb(); int search_db();
+void export_db();
 typedef struct search_cb_data_t
 {
     char List[32];
@@ -22,7 +23,7 @@ int nNum=0;
 system("cls");
 UI(nNum);
 
-    if(nNum==1) printf("프로그램을 이용해주셔서 감사합니다."); system("timeout -t 1 /NOBREAK"); system("exit");
+    if(nNum==1) printf("Thank you for using this program :)"); system("timeout -t 1 /NOBREAK"); system("exit");
 
     if(nNum==2) {save(); return 0;} // input information in database file
 
@@ -31,6 +32,8 @@ UI(nNum);
     if(nNum==4) {load(); return 0;} // load information in database file
 
     if(nNum==5) {search(); return 0;} // search information in database file
+
+    if(nNum==6) {export_db(); return 0;}
 }
 
 /***********************Below this line is a function realization***********************/
@@ -38,11 +41,12 @@ UI(nNum);
 int UI(int nNum)
 {
 reset_nNum(nNum);
-printf("1. 프로그램 종료\n");
-printf("2. 정보 입력\n");
-printf("3. 정보 업데이트\n");
-printf("4. 정보 조회\n");
-printf("5. 정보 검색\n");
+printf("1. Quit Program \n");
+printf("2. Enter Information \n");
+printf("3. Update Information \n");
+printf("4. Load Information \n");
+printf("5. Search Information \n");
+printf("6. Export database to csv file \n");
 printf("실행할 작업의 숫자를 입력해주세요 : "); scanf("%d",&nNum);
 }
 
@@ -194,4 +198,14 @@ int search_db()
  }
  main();
  return -1;
+}
+
+void export_db()
+{
+    char c[1000];
+    FILE *fptr;
+    fptr=fopen("output.csv","w");
+    system("sqlite3 -header -csv 'date.db' 'select * from Info;' > output.csv");
+    return 0;
+    main();
 }
