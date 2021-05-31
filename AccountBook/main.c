@@ -19,10 +19,10 @@ typedef struct search_cb_data_t
 int main()
 {
 int nNum=0;
-reset_nNum(nNum);
+system("cls");
 UI(nNum);
 
-    if(nNum==1) printf("프로그램을 이용해주셔서 감사합니다."); system("exit");
+    if(nNum==1) printf("프로그램을 이용해주셔서 감사합니다."); system("timeout -t 1 /NOBREAK"); system("exit");
 
     if(nNum==2) {save(); return 0;} // input information in database file
 
@@ -37,9 +37,10 @@ UI(nNum);
 
 int UI(int nNum)
 {
+reset_nNum(nNum);
 printf("1. 프로그램 종료\n");
 printf("2. 정보 입력\n");
-printf("3. 정보 수정\n");
+printf("3. 정보 업데이트\n");
 printf("4. 정보 조회\n");
 printf("5. 정보 검색\n");
 printf("실행할 작업의 숫자를 입력해주세요 : "); scanf("%d",&nNum);
@@ -67,12 +68,12 @@ int nNum_value=0;char *List;int Date;int Price;
    char *zErrMsg=0;
    char query[128]={0,};
    if(!db||!List||!Date||!Price) return -1;
-   printf("몇 개의 데이터를 삽입하시겠습니까? : ");
+   printf("How many data do you want to inster? : ");
    scanf("%d",&nNum_value);
    while(nNum_value=0)
    {
-    sprintf_s(query, 128, "\n어떤 데이터를 삽입하시겠습니까? 날짜,내용,가격(krw)순으로 입력해주세요. ex)10101,A,10000 ('%d', '%s', '%d');", Date,List,Price);
-    printf("현재 %d 번째 데이터를 삽입하셨습니다.",nNum_value);
+    sprintf_s(query, 128, "\n What data do you want to insert? Please enter in order date,contents,price[krw]. ex)20000214,A,10000 ('%d', '%s', '%d');", Date,List,Price);
+    printf("You have now entered the %dth data.",nNum_value);
     nNum_value=nNum_value-1;
    if (sqlite3_exec(db, query, NULL, 0, &zErrMsg) != SQLITE_OK)
    {
@@ -91,7 +92,7 @@ int nNum_value=0;char *List;int Date;int Price;
         return 1;
    }
    sqlite3_close(db); // close database file
-   printf("정보가 입력되었습니다.");
+   printf("Information is entered.");
    return 0;
    main();
 }
@@ -99,7 +100,7 @@ int nNum_value=0;char *List;int Date;int Price;
 update_db()
 {
  sqlite3 *db; char *List; int *Date; int *Price; int what;
- printf("어떤 데이터를 바꾸시겠습니까?\n 1. Price \n 2. Date");
+ printf("What data do you want to update?\n 1. Price \n 2. Date");
  scanf("%d",&what);
  char *zErrMsg = 0;
  char query[128] = { 0, };
@@ -175,7 +176,7 @@ int search_db()
 
  memset(&user_data, 0, sizeof(search_cb_data_t));
 
- printf("어떤 리스트를 검색하시겠습니까?");
+ printf("What type of data do you want to search? ");
  sprintf_s(user_data.List, 32, "%s", List);
  sprintf_s(query, 128, "SELECT * FROM Info WHERE List LIKE '%s';", List);
 
