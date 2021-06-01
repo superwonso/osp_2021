@@ -107,17 +107,18 @@ int save(void)
     scanf("%d", &nNum_value);
     while (nNum_value == 0)
     {
-        sprintf_s(query, 128, "\n What data do you want to insert? Please enter in order date,contents,price[krw]. ex)20000214,A,10000 ('%d', '%s', '%d');", Date, List, Price);
+        sprintf_s(query, 128, "\n What data do you want to insert? Please enter in order date[YYMMDD],contents,price[krw]. ('%d', '%s', '%d');\0", Date, List, Price);
         puts(query);
         printf("You have now entered the %dth data.", nNum_value);
         nNum_value = nNum_value - 1;
         if (sqlite3_exec(db, query, NULL, 0, &zErrMsg) != SQLITE_OK)
         {
-            _trace(TEXT("INSERT : %S\r\n"), zErrMsg);
+             _trace(TEXT("INSERT : %s\r\n"), zErrMsg);
             sqlite3_free(zErrMsg);
             return -1;
         }
     }
+
     return 0;
     rc = sqlite3_exec(db, query, 0, 0, &err_msg);
     if (rc != SQLITE_OK) //occur error when close database file
@@ -187,7 +188,7 @@ int create_table(sqlite3 *db)
         sqlite3_free(zErrMsg);
         return -1;
     }
-    _trace(TEXT("Success to make table ! \r\n"));
+    _trace(TEXT("Success to make table ! \r\n"),zErrMsg);
 
     return 0;
 }
@@ -231,7 +232,7 @@ int search_db()
 
     printf("What type of data do you want to search? ");
     sprintf_s(user_data.List, 32, "%s", List);
-    sprintf_S(query, 128, "SELECT * FROM Info WHERE List LIKE '%s';", List);
+    sprintf_s(query, 128, "SELECT * FROM Info WHERE List LIKE '%s';", List);
 
     if (sqlite3_exec(db, query, search_cb, (void *)&user_data, &zErrMsg) != SQLITE_OK) // if NotFound
     {
