@@ -269,5 +269,5 @@ int callback()
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
     } 
     printf("\n");
-    return 0;
+    return 0;   
 }
