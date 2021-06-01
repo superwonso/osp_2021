@@ -113,7 +113,7 @@ int save(void)
         nNum_value = nNum_value - 1;
         if (sqlite3_exec(db, query, NULL, 0, &zErrMsg) != SQLITE_OK)
         {
-            sqlite3_trace_(TEXT("INSERT : %s\r\n"), zErrMsg);
+            sqlite3_trace_v2(db,'TEXT("INSERT : %s\r\n")',callback,NULL);
             sqlite3_free(zErrMsg);
             return -1;
         }
@@ -147,7 +147,6 @@ int update_db()
     char query[128] = {
         0,
     };
-
     if (!db || !List)
         return -1;
 
@@ -156,7 +155,7 @@ int update_db()
         sprintf_s(query, 128, "UPDATE Info SET Date = '%d' WHERE List ='%s';\0", Date, List);
         if (sqlite3_exec(db, query, NULL, 0, &zErrMsg) != SQLITE_OK)
         {
-            sqlite3_trace_(TEXT("Database Updated : %S\r\n"), zErrMsg);
+            sqlite3_trace_v2(db,'TEXT("Database Updated : %S\r\n")',callback,NULL);
             sqlite3_free(zErrMsg);
             return -1;
         }
@@ -167,7 +166,7 @@ int update_db()
         sprintf_s(query, 128, "UPDATE Info SET Price = '%d' WHERE List ='%s';\0", Price, List);
         if (sqlite3_exec(db, query, NULL, 0, &zErrMsg) != SQLITE_OK)
         {
-            sqlite3_trace_(TEXT("Datebase Updated : %S\r\n"), zErrMsg);
+            sqlite3_trace_v2(db,'TEXT("Datebase Updated : %S\r\n")', callback,NULL);
             sqlite3_free(zErrMsg);
             return -1;
         }
@@ -184,11 +183,11 @@ int create_table(sqlite3 *db)
         return -1;
     if (sqlite3_exec(db, create_query, NULL, NULL, &zErrMsg) != SQLITE_OK)
     {
-        sqlite3_trace_(TEXT("Create Table: %S\r\n"), zErrMsg);
+        sqlite3_trace_v2(db,'TEXT("Create Table: %S\r\n")', callback,NULL);
         sqlite3_free(zErrMsg);
         return -1;
     }
-    sqlite3_trace_(TEXT("Success to make table ! \r\n"),zErrMsg);
+    sqlite3_trace_v2(db,'TEXT("Success to make table ! \r\n")',callback,NULL);
 
     return 0;
 }
@@ -236,7 +235,7 @@ int search_db()
 
     if (sqlite3_exec(db, query, search_cb, (void *)&user_data, &zErrMsg) != SQLITE_OK) // if NotFound
     {
-        sqlite3_trace_(TEXT("SELECT : %S\n"), zErrMsg);
+        sqlite3_trace_v2(db,'TEXT("SELECT : %S\n")',callback,NULL);
         sqlite3_free(zErrMsg);
         return -1;
     }
