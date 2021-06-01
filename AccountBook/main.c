@@ -1,9 +1,8 @@
-// "gcc -o accountbook sqlite3.c main.c" is build command
-#include <stdio.h>  // standard input/output header
-#include <stdlib.h> // To Use system function
-#include <string.h>
+// "gcc -std=c11 -o accountbook sqlite3.c main.c" is build command
 #include "sqlite3.h" // To Use sqlite3
-
+#include <stdio.h>   // standard input/output header
+#include <stdlib.h>  // To Use system function
+#include <string.h>  // To Use memory function
 int save(); int callback(); int update_db(); int UI();
 int reset_nNum(); int create_table();
 static int search_cb(); int search_db(); int export_db();
@@ -82,7 +81,7 @@ int reset_nNum(int nNum)
     return 0;
 }
 
-int save()
+int save(void)
 {
     sqlite3 *db;                           // handle of database
     char *err_msg = 0;                     // if occur errors, this pointer point to error msg
@@ -263,15 +262,12 @@ int export_db()
 }
 
 int callback()
-{
-    void *NotUsed; int argc; char **argv; char **azColName;
+{    void *NotUsed; int argc; char **argv; char **azColName;
     NotUsed = 0;
-    
     for (int i = 0; i < argc; i++)
     {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    
+    } 
     printf("\n");
     return 0;
 }
