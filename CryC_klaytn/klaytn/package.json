@@ -1,0 +1,26 @@
+{
+  "name": "klaytn",
+  "version": "0.0.1",
+  "description": "cdh_project_klaytn",
+  "main": "index.js",
+  "scripts": {
+    "test": "Hello"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superwonso/osp_2021.git"
+  },
+  "keywords": [
+    "cryptocurrency"
+  ],
+  "author": "superwonso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superwonso/osp_2021/issues"
+  },
+  "homepage": "https://github.com/superwonso/osp_2021#readme",
+  "dependencies": {
+    "caver-js": "^1.6.4",
+    "truffle": "^4.1.15"
+  }
+}
