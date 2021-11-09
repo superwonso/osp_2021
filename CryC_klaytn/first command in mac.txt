@@ -1,3 +1,0 @@
-export PATH=$PATH:$PWD/ken-darwin-amd64/bin
-cd claytn
-export PATH=`pwd`:$PATH
